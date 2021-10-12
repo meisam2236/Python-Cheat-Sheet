@@ -1,21 +1,33 @@
+- [Metaclasses](#metaclasses)
 - [String Formatting](#string-formatting)
+  - [f-string](#f-string)
+    - [fixed point number](#fixed-point-number)
+    - [More variables](#more-variables)
+    - [Percentage](#percentage)
+    - [HEX](#hex)
+    - [Big number](#big-number)
+    - [Positive number](#positive-number)
+    - [Aligning](#aligning)
+  - [format()](#format)
+    - [fixed point number](#fixed-point-number-1)
+    - [More variables](#more-variables-1)
 - [Magic Methods(Dunder Methods)](#magic-methodsdunder-methods)
-  - [`__init__()`](#__init__)
-  - [`__repr__()`](#__repr__)
-  - [`__add__()`](#__add__)
-  - [`__len__()`](#__len__)
-  - [`__eq__()`](#__eq__)
-  - [`__getitem__()`](#__getitem__)
-  - [`__setitem__()`](#__setitem__)
-  - [`__delitem__()`](#__delitem__)
-  - [`__reversed__()`](#__reversed__)
-  - [`__call__()`](#__call__)
+  - [__init__()](#init)
+  - [__repr__()](#repr)
+  - [__add__()](#add)
+  - [__len__()](#len)
+  - [__eq__()](#eq)
+  - [__getitem__()](#getitem)
+  - [__setitem__()](#setitem)
+  - [__delitem__()](#delitem)
+  - [__reversed__()](#reversed)
+  - [__call__()](#call)
   - [Other dunder methods](#other-dunder-methods)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
-  - [`map()`](#map)
+  - [map()](#map)
     - [Zip function with Map](#zip-function-with-map)
-  - [`filter()`](#filter)
-  - [`reduce()`](#reduce)
+  - [filter()](#filter)
+  - [reduce()](#reduce)
 - [Context Manager](#context-manager)
   - [write on file](#write-on-file)
   - [Custom Context Manager](#custom-context-manager)
@@ -29,10 +41,87 @@
 - [Pytest](#pytest)
   - [Installation](#installation)
   - [Usage](#usage)
-# String Formatting
+# Metaclasses
 
+# String Formatting
+## f-string
+**f-string is only available in python 3.6 above.**
+```python
+num = 23
+print(f'This is your number: {num}')
+```
+### fixed point number
+```python
+num = 3.3333333
+print(f'This is your number: {num:.2f}')
+```
+### More variables
+```python
+numOne = 3
+numTwo = 4
+numThree = 5
+print(f'number one: {numOne}\nnumber two: {numTwo}\nnumber three: {numThree}')
+```
+### Percentage
+```python
+num = 0.25 # It's 25 percent.
+print(f'Your score is {num:.0%}')
+```
+### HEX
+```python
+num = 255
+print(f'Hex of {num} is {num:x}') # X used for upper-case and x used for lower-case
+```
+### Big number
+```python
+num = 3000000
+print(f'Your number is {num:,}') # 3,000,000
+```
+### Positive number
+```python
+num = 3
+print(f'number: {num:+}')
+```
+### Aligning
+```python
+num = 34
+print(f'The number {num:^4} is your number!') # 4 is the number for spaces
+print(f'The number {num:>4} is your number!')
+print(f'The number {num:<4} is your number!')
+```
+## format()
+```python
+num = 23
+print('This is your number: '.format(num))
+```
+### fixed point number
+```python
+num = 3.3333333
+print('This is your number: {:.2f}'.format(num))
+```
+### More variables
+```python
+numOne = 3
+numTwo = 4
+numThree = 5
+print('number one: {}\nnumber two: {}\nnumber three: {}'.format(numOne, numTwo, numThree))
+```
+You can use index to make custom order:
+```python
+numOne = 3
+numTwo = 4
+numThree = 5
+print('number one: {0}\nnumber two: {1}\nnumber three: {2}'.format(numOne, numTwo, numThree))
+```
+Another way:
+```python
+numOne = 3
+numTwo = 4
+numThree = 5
+print('number one: {first}\nnumber two: {second}\nnumber three: {third}'.format(first = numOne, second = numTwo, third = numThree))
+```
 # Magic Methods(Dunder Methods)
-## `__init__()`
+## __init__()
 ```python
 class String:
 	def __init__(self, string):
@@ -42,7 +131,7 @@ newString = String('Hello')
 print(newString)
 ```
 The print function above gives us the memory location of the object. To get the string itself we need another dunder method called representation...
-## `__repr__()`
+## __repr__()
 ```python
 class String:
     def __init__(self, string):
@@ -54,7 +143,7 @@ newString = String('Hello')
 print(newString)
 ```
 Now, how we can combine this string with another one?!(since the str object can't combine with another class!)
-## `__add__()`
+## __add__()
 ```python
 class String:
     def __init__(self, string):
@@ -67,7 +156,7 @@ class String:
 newString = String('Hello')
 print(newString + ' world!')
 ```
-## `__len__()`
+## __len__()
 For getting the length of an object:
 ```python
 class String:
@@ -83,7 +172,7 @@ class String:
 newString = String('Hello')
 print(len(newString))
 ```
-## `__eq__()`
+## __eq__()
 For checking equality of two things:
 ```python
 class String:
@@ -101,7 +190,7 @@ class String:
 newString = String('Hello')
 print(newString=='Hello')
 ```
-## `__getitem__()`
+## __getitem__()
 To get an item with the index:
 ```python
 class String:
@@ -121,7 +210,7 @@ class String:
 newString = String('Hello')
 print(newString[0])
 ```
-## `__setitem__()`
+## __setitem__()
 As you know, str object does not support item assignment. But we are making custom str object. So to set an item with the index:
 ```python
 class String:
@@ -150,7 +239,7 @@ newString = String('Hello')
 newString[0] = 'h'
 print(newString)
 ```
-## `__delitem__()`
+## __delitem__()
 Because str objects are immutable, like the previous one, we should write the function manually:
 ```python
 class String:
@@ -185,7 +274,7 @@ newString = String('Hello')
 del newString[0]
 print(newString)
 ```
-## `__reversed__()`
+## __reversed__()
 Reverse the string:
 ```python
 class String:
@@ -221,7 +310,7 @@ class String:
 newString = String('Hello')
 print(reversed(newString))
 ```
-## `__call__()`
+## __call__()
 use the object instance to call a function:
 ```python
 class String:
@@ -262,7 +351,7 @@ newString('test')
 ## Other dunder methods
 To see the full list visit [3. Data model — Python 3.10.0 documentation](https://docs.python.org/3/reference/datamodel.html#basic-customization)
 # Map, Filter and Reduce
-## `map()`
+## map()
 ```python
 # map(func, *iterables)
 li = ['1', '2', '3', '4', '5']
@@ -300,13 +389,13 @@ And the result will be the same:
 ```
 [('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5)]
 ```
-## `filter()`
+## filter()
 ```python
 li = [1, -1, 2, -2, 3, -3]
 newLi = list(filter(lambda x: x >= 0, li))
 print(newLi)
 ```
-## `reduce()`
+## reduce()
 ```python
 # reduce(func, iterable[, initial])
 from functools import reduce
