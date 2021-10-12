@@ -1,4 +1,3 @@
-- [Metaclasses](#metaclasses)
 - [String Formatting](#string-formatting)
   - [f-string](#f-string)
     - [fixed point number](#fixed-point-number)
@@ -11,6 +10,17 @@
   - [format()](#format)
     - [fixed point number](#fixed-point-number-1)
     - [More variables](#more-variables-1)
+- [Context Manager](#context-manager)
+  - [write on file](#write-on-file)
+  - [Custom Context Manager](#custom-context-manager)
+  - [delete file](#delete-file)
+- [Handling Errors](#handling-errors)
+  - [Try except](#try-except)
+    - [Common exceptions](#common-exceptions)
+  - [else](#else)
+  - [finally](#finally)
+  - [Custom exception](#custom-exception)
+  - [Representing exception](#representing-exception)
 - [Magic Methods(Dunder Methods)](#magic-methodsdunder-methods)
   - [__init__()](#init)
   - [__repr__()](#repr)
@@ -23,15 +33,13 @@
   - [__reversed__()](#reversed)
   - [__call__()](#call)
   - [Other dunder methods](#other-dunder-methods)
+- [Metaclasses](#metaclasses)
+  - [Create metaclass](#create-metaclass)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
   - [map()](#map)
     - [Zip function with Map](#zip-function-with-map)
   - [filter()](#filter)
   - [reduce()](#reduce)
-- [Context Manager](#context-manager)
-  - [write on file](#write-on-file)
-  - [Custom Context Manager](#custom-context-manager)
-  - [delete file](#delete-file)
 - [Asynchronous and Parallel Programming](#asynchronous-and-parallel-programming)
   - [Parallelism(CPU bound)](#parallelismcpu-bound)
   - [Concurrency(I/O bound)](#concurrencyio-bound)
@@ -41,8 +49,6 @@
 - [Pytest](#pytest)
   - [Installation](#installation)
   - [Usage](#usage)
-# Metaclasses
-
 # String Formatting
 ## f-string
 **f-string is only available in python 3.6 above.**
@@ -119,6 +125,155 @@ numOne = 3
 numTwo = 4
 numThree = 5
 print('number one: {first}\nnumber two: {second}\nnumber three: {third}'.format(first = numOne, second = numTwo, third = numThree))
+```
+# Context Manager
+```python
+with open('test.txt', 'r') as f:
+	data = f.read()
+```
+| key | operation |
+| --- |:---------:|
+|  r  |    read   |
+|  a  |   append  |
+|  w  |   write   |
+|  x  |   create  |
+To open file as binary, use b beside the key(t for text mode):
+```python
+with open('test.txt', 'rt') as f:
+    print(f.read(5))
+    print(f.readline())
+```
+## write on file
+```python
+oldData = ''
+
+with open('test.txt', 'r') as f:
+    oldData = f.read()
+
+newData = oldData.replace('\n', '\t')
+
+with open('test.txt', 'w') as f:
+    f.write(newData)
+```
+## Custom Context Manager
+```python
+from pymongo import MongoClient
+  
+class MongoDBConnectionManager():
+    def __init__(self, hostname, port):
+        self.hostname = hostname
+        self.port = port
+        self.connection = None
+  
+    def __enter__(self):
+        self.connection = MongoClient(self.hostname, self.port)
+        return self
+  
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        self.connection.close()
+  
+# connecting with a localhost
+with MongoDBConnectionManager('localhost', '27017') as mongo:
+    collection = mongo.connection.SampleDb.test
+    data = collection.find({'_id': 1})
+    print(data.get('name'))
+```
+## delete file
+```python
+import os
+
+if os.path.exists('test.txt'):
+    os.remove('test.txt')
+```
+# Handling Errors
+## Try except
+```python
+try:
+	print(10/0)
+except:
+	print('An exception occured!')
+```
+We can use specific except:
+```python
+try:
+	print(10/0)
+except ZeroDivisionError:
+	print('Zero Division Error')
+except:
+	print('An exception occured!')
+```
+### Common exceptions
+|Exception | Cause of Error|
+| --- | :---: |
+|`AssertionError`|Raised when an `assert` statement fails.|
+|`AttributeError`|Raised when attribute assignment or reference fails.|
+|`EOFError`|Raised when the `input()` function hits end-of-file condition.|
+|`FloatingPointError`|Raised when a floating point operation fails.|
+|`GeneratorExit`|Raise when a generator's `close()` method is called.|
+|`ImportError`|Raised when the imported module is not found.|
+|`IndexError`|Raised when the index of a sequence is out of range.|
+|`KeyError`|Raised when a key is not found in a dictionary.|
+|`KeyboardInterrupt`|Raised when the user hits the interrupt key (`Ctrl+C` or `Delete`).|
+|`MemoryError`|Raised when an operation runs out of memory.|
+|`NameError`|Raised when a variable is not found in local or global scope.|
+|`NotImplementedError`|Raised by abstract methods.|
+|`OSError`|Raised when system operation causes system related error.|
+|`OverflowError`|Raised when the result of an arithmetic operation is too large to be represented.|
+|`ReferenceError`|Raised when a weak reference proxy is used to access a garbage collected referent.|
+|`RuntimeError`|Raised when an error does not fall under any other category.|
+|`StopIteration`|Raised by `next()` function to indicate that there is no further item to be returned by iterator.|
+|`SyntaxError`|Raised by parser when syntax error is encountered.|
+|`IndentationError`|Raised when there is incorrect indentation.|
+|`TabError`|Raised when indentation consists of inconsistent tabs and spaces.|
+|`SystemError`|Raised when interpreter detects internal error.|
+|`SystemExit`|Raised by `sys.exit()` function.|
+|`TypeError`|Raised when a function or operation is applied to an object of incorrect type.|
+|`UnboundLocalError`|Raised when a reference is made to a local variable in a function or method, but no value has been bound to that variable.|
+|`UnicodeError`|Raised when a Unicode-related encoding or decoding error occurs.|
+|`UnicodeEncodeError`|Raised when a Unicode-related error occurs during encoding.|
+|`UnicodeDecodeError`|Raised when a Unicode-related error occurs during decoding.|
+|`UnicodeTranslateError`|Raised when a Unicode-related error occurs during translating.|
+|`ValueError`|Raised when a function gets an argument of correct type but improper value.|
+|`ZeroDivisionError`|Raised when the second operand of division or modulo operation is zero.|
+## else
+else will be executed if no errors occured:
+```python
+try:
+	print(10/0)
+except:
+	print('An exception occured!')
+else:
+	print('Successfully completed!')
+```
+## finally
+finally will be always executed. You can use it to close objects or something:
+```python
+try:
+	f = open("test.txt")
+	f.write("Testing...")
+except:
+	print("Something went wrong when writing to the file!")
+finally:
+	f.close()
+```
+## Custom exception
+We want to get a number to calculate the factorial of it:
+```python
+import math
+
+num = input('Please enter your number: ')
+
+if num.isdigit()==False:
+	raise TypeError('Only positive numbers are allowed!')
+digit = int(num)
+print(math.factorial(digit))
+```
+## Representing exception
+```python
+try:
+	print(a)
+except Exception as e:
+	print(e)
 ```
 # Magic Methods(Dunder Methods)
 ## __init__()
@@ -350,6 +505,45 @@ newString('test')
 ```
 ## Other dunder methods
 To see the full list visit [3. Data model — Python 3.10.0 documentation](https://docs.python.org/3/reference/datamodel.html#basic-customization)
+# Metaclasses
+create simple class with `type()`:
+```python
+class AnotherClass:
+	def another_test(self):
+		print('Testing...')
+		
+Test = type('Test', (AnotherClass,), {'a': 20}) # arguments: class name, parent, attributes
+test = Test()
+test.another_test()
+print(test.a)
+```
+## Create metaclass
+```python
+class Meta(type):
+	def __new__(self, class_name, bases, attrs):
+		return type(class_name, bases, attrs)
+
+class test(metaclass=Meta):
+	pass
+```
+**Tip:** `__new__()` will be called even before `__init__()` method.
+**Example:** We want to make a metaclass that have `all()` function and it will return all attributes of the class:
+```python
+class Collection(type):
+	def __new__(self, class_name, bases, attrs):
+		def all(self):
+			return [name for name, values in attrs.items() if not name.startswith('__') and not callable(value)]
+	attrs['all'] = all
+	return type(class_name, bases, attrs)
+	
+class Data:
+	score = 100
+	is_admin = False
+	name = 'rick'
+
+d = Data()
+print(d.all())
+```
 # Map, Filter and Reduce
 ## map()
 ```python
@@ -404,65 +598,6 @@ numbers = [1, 2, 3, 4, 5]
 
 result = reduce(lambda x, y: x+y, numbers)
 print(result)
-```
-# Context Manager
-```python
-with open('test.txt', 'r') as f:
-	data = f.read()
-```
-| key | operation |
-| --- |:---------:|
-|  r  |    read   |
-|  a  |   append  |
-|  w  |   write   |
-|  x  |   create  |
-To open file as binary, use b beside the key(t for text mode):
-```python
-with open('test.txt', 'rt') as f:
-    print(f.read(5))
-    print(f.readline())
-```
-## write on file
-```python
-oldData = ''
-
-with open('test.txt', 'r') as f:
-    oldData = f.read()
-
-newData = oldData.replace('\n', '\t')
-
-with open('test.txt', 'w') as f:
-    f.write(newData)
-```
-## Custom Context Manager
-```python
-from pymongo import MongoClient
-  
-class MongoDBConnectionManager():
-    def __init__(self, hostname, port):
-        self.hostname = hostname
-        self.port = port
-        self.connection = None
-  
-    def __enter__(self):
-        self.connection = MongoClient(self.hostname, self.port)
-        return self
-  
-    def __exit__(self, exc_type, exc_value, exc_traceback):
-        self.connection.close()
-  
-# connecting with a localhost
-with MongoDBConnectionManager('localhost', '27017') as mongo:
-    collection = mongo.connection.SampleDb.test
-    data = collection.find({'_id': 1})
-    print(data.get('name'))
-```
-## delete file
-```python
-import os
-
-if os.path.exists('test.txt'):
-    os.remove('test.txt')
 ```
 # Asynchronous and Parallel Programming
 ## Parallelism(CPU bound)
