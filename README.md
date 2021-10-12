@@ -1,3 +1,10 @@
+- [Scope](#scope)
+  - [Local Scope](#local-scope)
+    - [Function inside Function](#function-inside-function)
+  - [Global Scope](#global-scope)
+    - [Naming variables](#naming-variables)
+    - [global keyword](#global-keyword)
+  - [nonlocal variable](#nonlocal-variable)
 - [String Formatting](#string-formatting)
   - [f-string](#f-string)
     - [fixed point number](#fixed-point-number)
@@ -10,10 +17,19 @@
   - [format()](#format)
     - [fixed point number](#fixed-point-number-1)
     - [More variables](#more-variables-1)
+- [Modules](#modules)
+  - [Changing name](#changing-name)
+  - [built-in modules](#built-in-modules)
+  - [Methods of a module](#methods-of-a-module)
+  - [Importing part of a module](#importing-part-of-a-module)
 - [Context Manager](#context-manager)
   - [write on file](#write-on-file)
   - [Custom Context Manager](#custom-context-manager)
   - [delete file](#delete-file)
+- [Debugger](#debugger)
+  - [Importing Python Debugger](#importing-python-debugger)
+  - [Add break point](#add-break-point)
+  - [Commands](#commands)
 - [Handling Errors](#handling-errors)
   - [Try except](#try-except)
     - [Common exceptions](#common-exceptions)
@@ -33,6 +49,9 @@
   - [__reversed__()](#reversed)
   - [__call__()](#call)
   - [Other dunder methods](#other-dunder-methods)
+- [Decorators](#decorators)
+  - [Error Handler Decorator](#error-handler-decorator)
+  - [Run Time Decorator](#run-time-decorator)
 - [Metaclasses](#metaclasses)
   - [Create metaclass](#create-metaclass)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
@@ -49,6 +68,78 @@
 - [Pytest](#pytest)
   - [Installation](#installation)
   - [Usage](#usage)
+# Scope
+## Local Scope
+```python
+def my_func():
+	a = 10
+	print(a)
+
+my_func()
+```
+### Function inside Function
+```python
+def my_func():
+	a = 10
+	def my_inner_func():
+		print(a)
+	my_inner_func()
+
+my_func()
+```
+## Global Scope
+```python
+a = 10
+def my_func():
+	print(a)
+
+myfunc()
+```
+### Naming variables
+```python
+a = 10
+
+def my_func():
+	a = 20
+	print(a)
+
+my_func()
+```
+### global keyword
+```python
+def my_func():
+	global a
+	a = 10
+	
+my_func()
+print(a)
+```
+To use the global value inside a function, first the function needs to be called! You can also change the global variable inside a function:
+```python
+a = 10
+
+def my_func():
+	global a
+	a = 20
+
+my_func()
+print(a)
+```
+## nonlocal variable
+```python
+a = 0
+def outer_func():
+	a = 10
+	def inner_func():
+		nonlocal a
+		a = 20
+		print(a)
+	inner_func()
+	print(a)
+
+outer_func()
+print(a)
+```
 # String Formatting
 ## f-string
 **f-string is only available in python 3.6 above.**
@@ -126,6 +217,37 @@ numTwo = 4
 numThree = 5
 print('number one: {first}\nnumber two: {second}\nnumber three: {third}'.format(first = numOne, second = numTwo, third = numThree))
 ```
+# Modules
+Create mymodule.py file:
+```python
+def adder(a, b):
+	return a + b
+```
+Now create another .py file to use the module:
+```python
+import mymodule
+
+c = mymodule.adder(3, 5)
+print(c)
+```
+## Changing name
+```python
+import matplotlib.pyplot as plt
+```
+## built-in modules
+[Python Module Index — Python 3.10.0 documentation](https://docs.python.org/3/py-modindex.html)
+## Methods of a module
+```python
+import datetime
+
+print(dir(datetime))
+```
+## Importing part of a module
+```python
+from datetime import datetime as time
+
+print(time.now())
+```
 # Context Manager
 ```python
 with open('test.txt', 'r') as f:
@@ -185,6 +307,26 @@ import os
 if os.path.exists('test.txt'):
     os.remove('test.txt')
 ```
+# Debugger
+## Importing Python Debugger
+```python
+import pdb
+```
+## Add break point
+```python
+pdb.set_trace()
+```
+## Commands
+| Key | Command |
+| --- | :---: |
+|n(ext)|Continue execution until the next line in the current function is reached or it returns.|
+|c(ont(inue))|Continue execution, only stop when a breakpoint is encountered.|
+|l(ist)|List source code for the current file.|
+|s(tep)|xecute the current line, stop at the first possible occasion.|
+|b(reak)|With a _lineno_ argument, set a break there in the current file. With a _function_ argument, set a break at the first executable statement within that function.|
+|cl(ear)|With a _filename:lineno_ argument, clear all the breakpoints at this line. With a space separated list of breakpoint numbers, clear those breakpoints. Without argument, clear all breaks|
+|p|Evaluate the _expression_ in the current context and print its value.|
+More commands on: [pdb — The Python Debugger — Python 3.10.0 documentation](https://docs.python.org/3/library/pdb.html)
 # Handling Errors
 ## Try except
 ```python
@@ -505,6 +647,45 @@ newString('test')
 ```
 ## Other dunder methods
 To see the full list visit [3. Data model — Python 3.10.0 documentation](https://docs.python.org/3/reference/datamodel.html#basic-customization)
+# Decorators
+## Error Handler Decorator
+```python
+def error_handler(func):
+    try:
+        func()
+    except Exception as e:
+        print(e)
+
+@error_handler
+def division_by_zero():
+    print(10/0)
+```
+## Run Time Decorator
+```python
+import time
+
+def time_comparison(round_num):
+	def decorator(func):
+		def wrapper(*args, **kwargs):
+			result = 0
+			for i in range(round_num):
+				start = time.time()*1000
+				func(*args, **kwargs)
+				result += time.time()*1000 - start # end - start
+			result /= round_num
+			print(f'Average time in {round_num} rounds: {result:.2f}')
+		return wrapper
+	return decorator
+	
+@time_comparison(round_num = 10)
+def factorial(n):
+    result = 1
+    for i in range(n, 1, -1):
+        result *= i 
+
+factorial(10000)
+```
+For more info visit: [Decorators with parameters in Python - GeeksforGeeks](https://www.geeksforgeeks.org/decorators-with-parameters-in-python/)
 # Metaclasses
 create simple class with `type()`:
 ```python
