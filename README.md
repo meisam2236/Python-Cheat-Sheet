@@ -1,4 +1,78 @@
 - [Data](#data)
+	- [Arithmatic Operators](#arithmatic-operators)
+	- [type](#type)
+	- [int](#int)
+	- [float](#float)
+	- [complex](#complex)
+	- [Casting](#casting)
+	- [string](#string)
+		- [multiple-line string](#multiple-line-string)
+		- [string as array](#string-as-array)
+		- [string slicing](#string-slicing)
+		- [len()](#len)
+		- [in-not in](#in-not-in)
+		- [Concatenate](#concatenate)
+		- [backslash](#backslash)
+		- [Other commands](#other-commands)
+	- [list](#list)
+		- [Accessing items in list](#accessing-items-in-list)
+		- [insert()](#insert)
+		- [append()](#append)
+		- [len()](#len-1)
+		- [extend()](#extend)
+		- [remove()](#remove)
+		- [pop()](#pop)
+		- [clear()](#clear)
+		- [del](#del)
+		- [constructor](#constructor)
+		- [sort()](#sort)
+		- [reverse()](#reverse)
+		- [List copying](#list-copying)
+	- [tuple](#tuple)
+		- [del](#del-1)
+		- [constructor](#constructor-1)
+		- [unpack tuples](#unpack-tuples)
+		- [tuple concat](#tuple-concat)
+		- [tuple multiplication](#tuple-multiplication)
+		- [count()](#count)
+		- [index()](#index)
+	- [range](#range)
+	- [set](#set)
+		- [len()](#len-2)
+		- [constructor](#constructor-2)
+		- [in](#in)
+		- [add()](#add)
+		- [remove()](#remove-1)
+		- [update()](#update)
+		- [discard()](#discard)
+		- [pop()](#pop-1)
+		- [clear()](#clear-1)
+		- [del](#del-2)
+		- [union()](#union)
+		- [intersection_update()](#intersection_update)
+		- [symmetric_difference()](#symmetric_difference)
+	- [frozenset](#frozenset)
+	- [dictionary](#dictionary)
+		- [changing values](#changing-values)
+		- [get item](#get-item)
+		- [len()](#len-3)
+		- [keys()](#keys)
+		- [values()](#values)
+		- [items()](#items)
+		- [in](#in-1)
+		- [update()](#update-1)
+		- [Adding item](#adding-item)
+		- [pop()](#pop-2)
+		- [popitem()](#popitem)
+		- [clear()](#clear-2)
+		- [del](#del-3)
+		- [Dictionary copying](#dictionary-copying)
+		- [nested dictionaries](#nested-dictionaries)
+		- [fromkeys](#fromkeys)
+		- [setdefault](#setdefault)
+	- [bool](#bool)
+		- [Comparison Operators](#comparison-operators)
+	- [Other types](#other-types)
 - [Comments](#comments)
 	- [One-line comment](#one-line-comment)
 	- [Multiple-line comment](#multiple-line-comment)
@@ -22,7 +96,7 @@
 		- [break](#break-1)
 		- [continue](#continue-1)
 		- [else](#else-2)
-		- [range()](#range)
+		- [range()](#range-1)
 		- [nested loops](#nested-loops)
 		- [pass](#pass-1)
 		- [List comprehension](#list-comprehension)
@@ -49,7 +123,7 @@
 	- [lambda](#lambda)
 	- [Recursive functions](#recursive-functions)
 - [Classes](#classes)
-	- [Constructor](#constructor)
+	- [Constructor](#constructor-3)
 	- [Changing object attrs](#changing-object-attrs)
 	- [pass](#pass-3)
 - [Object-Oriented Programming(OOP)](#object-oriented-programmingoop)
@@ -90,8 +164,8 @@
 - [Magic Methods(Dunder Methods)](#magic-methodsdunder-methods)
 	- [__init__()](#init)
 	- [__repr__()](#repr)
-	- [__add__()](#add)
-	- [__len__()](#len)
+	- [__add__()](#add-1)
+	- [__len__()](#len-4)
 	- [__eq__()](#eq)
 	- [__getitem__()](#getitem)
 	- [__setitem__()](#setitem)
@@ -123,6 +197,618 @@
 	- [Installation](#installation)
 	- [Usage](#usage)
 # Data
+```python
+a = 20
+b = 30 
+print(a+b)
+```
+## Arithmatic Operators
+|Operator|Name|
+|---|:---:|
+|+|Addition|
+|-|Subtraction|
+|\*|Multiplication|
+|/|Division|
+|%|Modulus|
+|\*\*|Exponentiation|
+|//|Floor division|
+## type
+```python
+a = 45
+print(type(a))
+```
+## int
+```python
+a = 32 
+b = 123456789 
+c = -43
+```
+## float
+```python
+a = 1.25 
+b = 3.0 
+c = -23.14567
+```
+## complex
+```python
+a = 2 + 3j 
+b = 6j 
+c = -2j
+```
+## Casting
+```python
+a = 32 
+b = 12.25 
+c = 3j  
+x = float(a) 
+y = int(b) 
+z = complex(a)  
+print(x) 
+print(y) 
+print(z)
+```
+## string
+**Tip:** string is immutable.
+```python
+a = 'hello world!' 
+b = "hello world!" 
+print(a) 
+print(b)
+```
+### multiple-line string
+```python
+a = '''Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit, 
+sed do eiusmod tempor incididunt 
+ut labore et dolore magna aliqua.''' 
+b = """Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit, 
+sed do eiusmod tempor incididunt 
+ut labore et dolore magna aliqua.""" 
+print(a) 
+print(b)
+```
+### string as array
+```python
+a = 'hello' 
+print(a[1])
+```
+### string slicing
+```python
+a = 'hello my friend!' 
+print(a[0:5])
+```
+**Another example:**
+```python
+a = 'hello my friend!' 
+b = a[:5] 
+c = a[6:] 
+d = a[:] 
+e = a[-7:-1] 
+print(a) 
+print(b) 
+print(c) 
+print(d) 
+print(e)
+```
+### len()
+```python
+a = 'test'
+print(len(a))
+```
+### in-not in
+```python
+text = "This is a test text!." 
+print('test' in text) 
+print('not' not in text)
+```
+### Concatenate
+```python
+a = 'Hello' 
+b = 'World!' 
+c = a + ' ' + b 
+print(c)
+```
+**Another example:**
+```python
+age = 25 
+txt = "My name is Meisam and I'm {}" 
+print(txt.format(age))
+```
+**Another example:**
+```python
+age = 25 
+txt = f"My name is Meisam and I'm {age}" 
+print(txt)
+```
+### backslash
+```python
+a = 'I\'m Meisam' 
+print(a)
+```
+|character|function|
+|---|:--:|
+|\\|\|
+|\n|new line|
+|\t|tab|
+|\b|backspace|
+### Other commands
+|Command|Action|
+|---|:---:|
+|`strip()`|remove white spaces before and after string|
+|`replace()`|replace with another string|
+|`lower()`|turn entire string to lowercase(Purely ASCII Text)|
+|`upper()`|turn entire string to uppercase|
+|`split()`|turn string to list with given character|
+|`capitalize()`|Capitalize the string|
+|`casefold()`|turn entire string to lowercase(Unicode text/user input)|
+View full list commands: [3.6.1 String Methods (python.org)](https://docs.python.org/2.5/lib/string-methods.html)
+## list
+```python
+myList = ['Ali', 'Hasan', 'Asqar'] 
+print(myList)
+```
+Lists can handle multiple type variables:
+```python
+myList = ['Apple', 12, 3.5, True] 
+print(myList)
+```
+### Accessing items in list
+```python
+li = ['apple', 'banana', 'cherry'] 
+print(li[1])
+```
+**Another examples:**
+```python
+li = ['apple', 'orange', 'banana', 'grapes', 'kiwi', 'lemon'] 
+print(li[2:4]) 
+print('watermelon' in li) 
+li[1] = 'watermelon' 
+print(li) 
+print('apple' in li)
+```
+### insert()
+```python
+li = ['apple', 'orange', 'banana', 'grapes', 'kiwi', 'lemon'] 
+li.insert(2, 'watermelon') 
+print(li)
+```
+### append()
+```python
+myList = ['apple', 'lemon', 'kiwi'] 
+myList.append('watermelon') 
+print(myList)
+```
+### len()
+```python
+myList = [1, 4, 65, 34, 23] 
+print(len(myList))
+```
+### extend()
+```python
+li = ['mango', 'apple', 'cherry'] 
+myList = ['watermelon', 'pineapple', 'lemon'] 
+li.extend(myList) 
+print(li)
+```
+### remove()
+```python
+myList = ['watermelon', 'pineapple', 'lemon'] 
+myList.remove('lemon') 
+print(myList) 
+```
+### pop()
+```python
+myList = ['watermelon', 'pineapple', 'lemon'] 
+myList.pop(0) 
+print(myList)
+```
+### clear()
+```python
+myList = ['watermelon', 'pineapple', 'lemon'] 
+myList.clear() 
+print(myList)
+```
+### del
+```python
+myList = ['watermelon', 'pineapple', 'lemon'] 
+del myList
+```
+### constructor
+```python
+li = list()
+myList = list((3, 5, 7))
+print(li)
+print(myList)
+```
+### sort()
+```python
+myList = ['brown', 'purple', 'green', 'yellow', 'blue'] 
+myList.sort() 
+print(myList) 
+li = [ 43, 32, 191, 8, 26, 365] 
+print(li.sort())
+```
+for descending sort, give argument `reverse=True`:
+```python
+myList = ['brown', 'purple', 'green', 'yellow', 'blue'] 
+myList.sort(reverse = True) 
+print(myList)
+```
+`sort()` is case sensetive. To cope that:
+```python
+li = ['Brown', 'purple', 'Yellow', 'pink', 'blue'] 
+li.sort(key = str.lower) 
+print(li)
+```
+### reverse()
+```python 
+myList = ['brown', 'purple', 'green', 'yellow', 'blue'] 
+myList.reverse() 
+print(myList)
+```
+### List copying
+```python
+li = [1, 2, 3, 4, 5] 
+li2 = li
+```
+By doing the code above, li2 use li as a reference. A better way to copy is using `copy()`:
+```python
+li = [1, 2, 3, 4, 5]
+li2 = li.copy()
+```
+Another approach will be:
+```python
+li = [1, 2, 3, 4, 5]
+li2 = list(li)
+```
+## tuple
+**Tip:** tuple is immutable.
+```python
+myTuple = ('apple', 'banana', 'orange') 
+print(myTuple) 
+tu = (1, 2, 3, 4) 
+print(tu[0]) 
+print(tu[0:2]) 
+print(tu[-1]) 
+tuple1 = ('Ali', 23, 1.78, True) 
+print(len(tuple1))
+```
+Make sure to use , at the end of tuple or python interpreter recognize it as a string:
+```python
+tu = ('test',) 
+print(type(tu)) 
+tu = ('test') 
+print(type(tu))
+```
+### del 
+```python
+thisTuple = (1, 3, 5, 7)
+del thisTuple
+```
+### constructor
+```python
+myTuple = tuple(('apple', 'banana', 'lemon')) 
+print(myTuple)
+```
+### unpack tuples
+```python
+colors = ('red', 'green', 'blue')
+(love, nature, ocean) = colors
+print(love)
+print(nature)
+print(ocean)
+```
+You can even have list in tuple and unpack it:
+```python
+tu = ([1, 2, 3], [4, 5, 6])
+(li1, li2) = tu
+print(li1)
+```
+You can use astrix(\*) to get all items:
+```python
+tu = ('red', 'green', 'blue', 'black', 'purple', 'yellow') 
+(love, *colors, sun) = tu
+print(love) 
+print(colors) 
+print(sun)
+```
+### tuple concat
+```python
+tu1 = ('apple', 'banana', 'orange') 
+tu2 = ('kiwi', 'lemon', 'grapes') 
+tu3 = tu1 + tu2 
+print(tu3)
+```
+### tuple multiplication
+```python
+tu1 = ('apple', 'banana', 'orange') 
+tu2 = tu1 * 2 
+print(tu2)
+```
+### count()
+```python
+tu1 = ('apple', 'banana', 'orange', 'apple') 
+print(tu1.count('apple'))
+```
+### index()
+```python
+tu1 = ('apple', 'banana', 'orange', 'apple') 
+print(tu1.index('banana')) 
+```
+## range
+```python
+x = range(1, 20, 2) # arguments: start, stop, step
+print(x)
+```
+## set
+Items in set doesn't have order; Thus it doesn't need index and items are unique! We use for loop to access items in set.
+```python
+mySet = {'apple', 'banana', 'orange'} 
+print(mySet)
+```
+### len()
+```python
+mySet = {'apple', 'banana', 'orange'} 
+print(len(mySet))
+```
+### constructor
+```python
+mySet = set(('apple', 'orange', 'banana')) 
+print(mySet)
+```
+### in
+```python
+mySet = {'apple', 'orange', 'banana'} 
+print('orange' in mySet)
+```
+### add()
+```python
+mySet = {'apple', 'orange', 'banana'} 
+mySet.add('lemon') 
+print(mySet) 
+```
+### remove()
+```python
+mySet = {'apple', 'orange', 'banana'} 
+mySet.remove('apple') 
+print(mySet)
+```
+### update()
+We can combine set with another set or list using `update()`:
+```python
+set1 = {'apple', 'orange', 'banana'} 
+set2 = ['kiwi', 'watermelon', 'lemon']
+set1.update(set2) 
+print(set1)
+```
+### discard()
+`discard()` is a safe `remove()` method(If item doesn't exist, it will not encounter error):
+```python
+mySet = {'apple', 'orange', 'banana'} 
+mySet.discard('lemon') 
+print(mySet)
+```
+### pop()
+```python
+mySet = {'apple', 'orange', 'banana'} 
+mySet.pop() 
+print(mySet)
+```
+### clear()
+```python
+mySet = {'apple', 'orange', 'banana'} 
+clear(mySet)
+print(mySet)
+```
+### del
+```python
+mySet = {'apple', 'orange', 'banana'} 
+del mySet
+```
+### union()
+create another set containing two sets:
+```python
+set1 = {'apple', 'orange', 'banana'} 
+set2 = {'kiwi', 'watermelon', 'lemon'} 
+set3 = set1.union(set2)
+print(set3)
+```
+### intersection_update()
+```python
+set1 = {'apple', 'orange', 'banana'} 
+set2 = {'apple', 'watermelon', 'lemon'} 
+set3 = set1.intersection_update(set2) 
+print(set3)
+```
+### symmetric_difference()
+```python
+set1 = {'apple', 'orange', 'banana'} 
+set2 = {'apple', 'watermelon', 'lemon'} 
+set3 = set1.symmetric_difference(set2) 
+print(set3)
+```
+## frozenset
+immutable set!
+```python
+myList = ['apple', 'banana', 'orange'] 
+fset = frozenset(myList)
+```
+## dictionary
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+print(myDict)
+```
+### changing values
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict['name'] = 'Hasan' 
+print(myDict)
+```
+### get item
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+print(myDict['age']) 
+name = myDict.get('name') 
+print(name)
+```
+### len()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+print(len(myDict))
+```
+### keys()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+keys = myDict.keys() 
+print(keys)
+```
+`keys()` uses the dictionary itself as a reference. So if anything changes in the dictionary, `keys()` will be updated too:
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+keys = myDict.keys() 
+print(keys) 
+myDict['weight'] = 70 
+print(keys)
+```
+### values()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+values = myDict.values() 
+print(values)
+```
+Same as `keys()`, `values()` uses the dictionary as a reference.
+### items()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+items = myDict.items() 
+print(items)
+```
+### in
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+print('weight' in myDict)
+```
+### update()
+If the key doesn't exist in the dictionary, it will create one:
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict.update({'weight': 73}) 
+print(myDict)
+```
+### Adding item
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict['weight'] = 80 
+print(myDict) 
+```
+### pop()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict.pop('age') 
+print(myDict)
+```
+### popitem()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict.popitem() 
+print(myDict)
+```
+### clear()
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict.clear() 
+print(myDict)
+```
+### del
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+del myDict
+```
+In dictionary, with `del` you can also delete an item:
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+del myDict['age'] 
+print(myDict)
+```
+### Dictionary copying
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict2 = myDict
+```
+By doing the code above, myDict2 use myDict as a reference. A better way to copy is using `copy()`:
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict2 = myDict.copy()
+```
+Another approach will be:
+```python
+myDict = {'name': 'Ali', 'age': 25, 'height': 1.73} 
+myDict2 = dict(myDict)
+```
+### nested dictionaries
+```python
+myDict = {
+	'child1':{
+		'name': 'Ali',
+		'age': 25,
+		'height': 1.73
+	},
+	'child2':{
+		'name': 'Hasan',
+		'age': 32,
+		'height': 1.80
+	}
+}
+```
+### fromkeys
+Returns a dictionary with the specified keys and the specified value.
+```python
+keys = ('key1', 'key2', 'key3')
+value = 0
+myDict = dict.fromkeys(keys, value)
+print(myDict)
+```
+### setdefault
+If the key exist, it has no effect. But if the key does not exist, the value given will become the key's value:
+```python
+car = {  
+ "brand": "Ford",  
+ "model": "Mustang",  
+ "year": 1964  
+}  
+  
+x = car.setdefault("color", "white")  
+  
+print(x)
+print(car)
+```
+## bool
+```python
+print(10 < 12) 
+print(10 >= 10) 
+a = 20 < 12 
+print(a)
+```
+You can also check variables with bool:
+```python
+print(bool('Hello')) 
+print(bool(0))
+```
+### Comparison Operators
+|Operator|Name|
+|---|:---:|
+|\==|Equal|
+|!=|Not equal|
+|>|Greater than|
+|<|Less than|
+|>=|Greater than or equal to|
+|<=|Less than or equal to|
+## Other types
+- byte array
+- bytes
+- memoryview
+- arrays
 # Comments
 ## One-line comment
 ```python
