@@ -1,73 +1,80 @@
+- [Classes](#classes)
 - [Scope](#scope)
-  - [Local Scope](#local-scope)
-    - [Function inside Function](#function-inside-function)
-  - [Global Scope](#global-scope)
-    - [Naming variables](#naming-variables)
-    - [global keyword](#global-keyword)
-  - [nonlocal variable](#nonlocal-variable)
+	- [Local Scope](#local-scope)
+		- [Function inside Function](#function-inside-function)
+	- [Global Scope](#global-scope)
+		- [Naming variables](#naming-variables)
+		- [global keyword](#global-keyword)
+	- [nonlocal variable](#nonlocal-variable)
 - [String Formatting](#string-formatting)
-  - [f-string](#f-string)
-    - [fixed point number](#fixed-point-number)
-    - [More variables](#more-variables)
-    - [Percentage](#percentage)
-    - [HEX](#hex)
-    - [Big number](#big-number)
-    - [Positive number](#positive-number)
-    - [Aligning](#aligning)
-  - [format()](#format)
-    - [fixed point number](#fixed-point-number-1)
-    - [More variables](#more-variables-1)
+	- [f-string](#f-string)
+		- [fixed point number](#fixed-point-number)
+		- [More variables](#more-variables)
+		- [Percentage](#percentage)
+		- [HEX](#hex)
+		- [Big number](#big-number)
+		- [Positive number](#positive-number)
+		- [Aligning](#aligning)
+	- [format()](#format)
+		- [fixed point number](#fixed-point-number-1)
+		- [More variables](#more-variables-1)
 - [Modules](#modules)
-  - [Changing name](#changing-name)
-  - [built-in modules](#built-in-modules)
-  - [Methods of a module](#methods-of-a-module)
-  - [Importing part of a module](#importing-part-of-a-module)
+	- [Changing name](#changing-name)
+	- [built-in modules](#built-in-modules)
+	- [Methods of a module](#methods-of-a-module)
+	- [Importing part of a module](#importing-part-of-a-module)
 - [Context Manager](#context-manager)
-  - [write on file](#write-on-file)
-  - [Custom Context Manager](#custom-context-manager)
-  - [delete file](#delete-file)
+	- [write on file](#write-on-file)
+	- [Custom Context Manager](#custom-context-manager)
+	- [delete file](#delete-file)
 - [Debugger](#debugger)
-  - [Importing Python Debugger](#importing-python-debugger)
-  - [Add break point](#add-break-point)
-  - [Commands](#commands)
+	- [Importing Python Debugger](#importing-python-debugger)
+	- [Add break point](#add-break-point)
+	- [Commands](#commands)
 - [Handling Errors](#handling-errors)
-  - [Try except](#try-except)
-    - [Common exceptions](#common-exceptions)
-  - [else](#else)
-  - [finally](#finally)
-  - [Custom exception](#custom-exception)
-  - [Representing exception](#representing-exception)
+	- [Try except](#try-except)
+		- [Common exceptions](#common-exceptions)
+	- [else](#else)
+	- [finally](#finally)
+	- [Custom exception](#custom-exception)
+	- [Representing exception](#representing-exception)
 - [Magic Methods(Dunder Methods)](#magic-methodsdunder-methods)
-  - [__init__()](#init)
-  - [__repr__()](#repr)
-  - [__add__()](#add)
-  - [__len__()](#len)
-  - [__eq__()](#eq)
-  - [__getitem__()](#getitem)
-  - [__setitem__()](#setitem)
-  - [__delitem__()](#delitem)
-  - [__reversed__()](#reversed)
-  - [__call__()](#call)
-  - [Other dunder methods](#other-dunder-methods)
+	- [__init__()](#init)
+	- [__repr__()](#repr)
+	- [__add__()](#add)
+	- [__len__()](#len)
+	- [__eq__()](#eq)
+	- [__getitem__()](#getitem)
+	- [__setitem__()](#setitem)
+	- [__delitem__()](#delitem)
+	- [__reversed__()](#reversed)
+	- [__call__()](#call)
+	- [Other dunder methods](#other-dunder-methods)
+- [Iterators and Generators](#iterators-and-generators)
+	- [Iterator](#iterator)
+		- [Custom iterator](#custom-iterator)
+	- [Generator](#generator)
 - [Decorators](#decorators)
-  - [Error Handler Decorator](#error-handler-decorator)
-  - [Run Time Decorator](#run-time-decorator)
+	- [Error Handler Decorator](#error-handler-decorator)
+	- [Run Time Decorator](#run-time-decorator)
 - [Metaclasses](#metaclasses)
-  - [Create metaclass](#create-metaclass)
+	- [Create metaclass](#create-metaclass)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
-  - [map()](#map)
-    - [Zip function with Map](#zip-function-with-map)
-  - [filter()](#filter)
-  - [reduce()](#reduce)
+	- [map()](#map)
+		- [Zip function with Map](#zip-function-with-map)
+	- [filter()](#filter)
+	- [reduce()](#reduce)
 - [Asynchronous and Parallel Programming](#asynchronous-and-parallel-programming)
-  - [Parallelism(CPU bound)](#parallelismcpu-bound)
-  - [Concurrency(I/O bound)](#concurrencyio-bound)
-  - [AsyncIO(I/O bound)](#asyncioio-bound)
-    - [asyncio.gather](#asynciogather)
-    - [asyncio.create_task](#asynciocreate_task)
+	- [Parallelism(CPU bound)](#parallelismcpu-bound)
+	- [Concurrency(I/O bound)](#concurrencyio-bound)
+	- [AsyncIO(I/O bound)](#asyncioio-bound)
+		- [asyncio.gather](#asynciogather)
+		- [asyncio.create_task](#asynciocreate_task)
 - [Pytest](#pytest)
-  - [Installation](#installation)
-  - [Usage](#usage)
+	- [Installation](#installation)
+	- [Usage](#usage)
+# Classes
+
 # Scope
 ## Local Scope
 ```python
@@ -647,6 +654,54 @@ newString('test')
 ```
 ## Other dunder methods
 To see the full list visit [3. Data model — Python 3.10.0 documentation](https://docs.python.org/3/reference/datamodel.html#basic-customization)
+# Iterators and Generators
+## Iterator
+```python
+li = ['apple', 'orange', 'banana']
+
+myIter = iter(li)
+print(next(myIter))
+print(next(myIter))
+print(next(myIter))
+```
+### Custom iterator
+```python
+class EvenNumbers:
+	def __iter__(self):
+		self.a = 0
+		return self
+	def __next__(self):
+		if self.a <= 10:
+			b = self.a
+			self.a += 2
+			return b
+
+evenClass = EvenNumbers()
+myIter = iter(evenClass)
+print(next(myIter))
+print(next(myIter))
+print(next(myIter))
+print(next(myIter))
+# for x in myIter:
+# 	print(x)
+```
+## Generator
+It's like iterator, but with simpler code!(function instead of class)
+```python
+def even_numbers():
+	a = 0
+	while a <= 10:
+		yield a # yield doesn't stop the the round
+		a += 2
+
+myGen = even_numbers()
+print(next(myGen))
+print(next(myGen))
+print(next(myGen))
+print(next(myGen))
+# for x in myGen:
+# 	print(x)
+```
 # Decorators
 ## Error Handler Decorator
 ```python
