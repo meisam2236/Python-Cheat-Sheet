@@ -1,11 +1,31 @@
-- [Classes](#classes)
-- [Scope](#scope)
-	- [Local Scope](#local-scope)
-		- [Function inside Function](#function-inside-function)
-	- [Global Scope](#global-scope)
-		- [Naming variables](#naming-variables)
-		- [global keyword](#global-keyword)
-	- [nonlocal variable](#nonlocal-variable)
+- [Data](#data)
+- [Comments](#comments)
+	- [One-line comment](#one-line-comment)
+	- [Multiple-line comment](#multiple-line-comment)
+- [If Statements](#if-statements)
+	- [if](#if)
+	- [elif(else if)](#elifelse-if)
+	- [else](#else)
+	- [shortened if statement](#shortened-if-statement)
+	- [and](#and)
+	- [or](#or)
+	- [nested if](#nested-if)
+	- [pass](#pass)
+- [Loops](#loops)
+	- [while loops](#while-loops)
+		- [break](#break)
+		- [continue](#continue)
+		- [else](#else-1)
+		- [while loop on sequential data](#while-loop-on-sequential-data)
+	- [for loops](#for-loops)
+		- [for loop on string](#for-loop-on-string)
+		- [break](#break-1)
+		- [continue](#continue-1)
+		- [else](#else-2)
+		- [range()](#range)
+		- [nested loops](#nested-loops)
+		- [pass](#pass-1)
+		- [List comprehension](#list-comprehension)
 - [String Formatting](#string-formatting)
 	- [f-string](#f-string)
 		- [fixed point number](#fixed-point-number)
@@ -18,6 +38,35 @@
 	- [format()](#format)
 		- [fixed point number](#fixed-point-number-1)
 		- [More variables](#more-variables-1)
+- [Functions](#functions)
+	- [Arguments](#arguments)
+	- [Desired Arguments](#desired-arguments)
+	- [Keyword Arguments](#keyword-arguments)
+		- [Desired Keyword Arguments](#desired-keyword-arguments)
+	- [Default Arguments](#default-arguments)
+	- [return](#return)
+	- [pass](#pass-2)
+	- [lambda](#lambda)
+	- [Recursive functions](#recursive-functions)
+- [Classes](#classes)
+	- [Constructor](#constructor)
+	- [Changing object attrs](#changing-object-attrs)
+	- [pass](#pass-3)
+- [Object-Oriented Programming(OOP)](#object-oriented-programmingoop)
+	- [Encapsulation](#encapsulation)
+	- [Inheritance](#inheritance)
+		- [Execute parent's init method](#execute-parents-init-method)
+		- [Child's function](#childs-function)
+	- [Composition](#composition)
+	- [Abstraction](#abstraction)
+	- [Polymorphism](#polymorphism)
+- [Scope](#scope)
+	- [Local Scope](#local-scope)
+		- [Function inside Function](#function-inside-function)
+	- [Global Scope](#global-scope)
+		- [Naming variables](#naming-variables)
+		- [global keyword](#global-keyword)
+	- [nonlocal variable](#nonlocal-variable)
 - [Modules](#modules)
 	- [Changing name](#changing-name)
 	- [built-in modules](#built-in-modules)
@@ -34,7 +83,7 @@
 - [Handling Errors](#handling-errors)
 	- [Try except](#try-except)
 		- [Common exceptions](#common-exceptions)
-	- [else](#else)
+	- [else](#else-3)
 	- [finally](#finally)
 	- [Custom exception](#custom-exception)
 	- [Representing exception](#representing-exception)
@@ -73,79 +122,217 @@
 - [Pytest](#pytest)
 	- [Installation](#installation)
 	- [Usage](#usage)
-# Classes
-
-# Scope
-## Local Scope
+# Data
+# Comments
+## One-line comment
 ```python
-def my_func():
-	a = 10
-	print(a)
-
-my_func()
+# This is a comment
+print('hello')
+# This is another comment
 ```
-### Function inside Function
+## Multiple-line comment
 ```python
-def my_func():
-	a = 10
-	def my_inner_func():
-		print(a)
-	my_inner_func()
-
-my_func()
+'''This is a comment
+This is another comment'''
+print('hello')
 ```
-## Global Scope
+# If Statements
+## if
 ```python
-a = 10
-def my_func():
-	print(a)
-
-myfunc()
+a = 200
+b = 100
+if a > b:
+	print(f'{a} is greater than {b}')
 ```
-### Naming variables
+## elif(else if)
 ```python
-a = 10
-
-def my_func():
-	a = 20
-	print(a)
-
-my_func()
+a = 100 b = 200
+if a > b:
+	print('a is greater than b')
+elif a < b:
+	print('b is greater than a')
 ```
-### global keyword
+## else
 ```python
-def my_func():
-	global a
-	a = 10
-	
-my_func()
-print(a)
+a = 100 b = 200
+if a > b:
+	print('a is greater than b')
+elif a==b:
+	print('a is equal to b')
+else:
+	print('b is greater than a')
 ```
-To use the global value inside a function, first the function needs to be called! You can also change the global variable inside a function:
+## shortened if statement
 ```python
-a = 10
-
-def my_func():
-	global a
-	a = 20
-
-my_func()
-print(a)
+a = 200
+b = 100
+if a > b: print('a is greater than b')
 ```
-## nonlocal variable
+**Another example:**
 ```python
-a = 0
-def outer_func():
-	a = 10
-	def inner_func():
-		nonlocal a
-		a = 20
-		print(a)
-	inner_func()
-	print(a)
+a = 100
+b = 200
+print('a is greater than b') if a > b else print('a is equal to b') if a == b else print('b is greater than a')
+```
+## and
+```python
+a = 200
+b = 100
+c = 50
 
-outer_func()
-print(a)
+if a > b and b > c:
+	print('a is greater than c')
+```
+## or
+```python
+a = 100
+b = 200
+c = 50
+
+if a > c or b > c:
+	print('a or b is greater than c')
+```
+## nested if
+```python
+x = 20
+if x > 10:
+	print('x is above 10')
+	if x > 20:
+		print('x is above 20')
+		if x > 30:
+			print('x is above 30')
+		else:
+			print('x is equal or below 30')
+	else:
+		print('x is equal or below 20')
+else:
+	print('x is equal or below 10')
+```
+## pass
+```python
+if 20 > 10:
+	pass
+```
+# Loops
+## while loops
+```python
+x = 1
+while x < 10:
+	print(x)
+	x += 1
+```
+### break
+```python
+i = 1
+while i < 10:
+	print(i)
+	if i == 5:
+		break
+	i += 1
+# output: 1 2 3 4 5
+```
+### continue
+```python
+i = 0
+while i < 10:
+	if i == 5:
+		continue
+	print(i)
+	i += 1
+# output: 0 1 2 3 4 6 7 8 9
+```
+### else
+```python
+i = 1
+while i < 10:
+	print(i)
+	i += 1
+else:
+	print('Loop ended!')
+```
+### while loop on sequential data
+```python
+li = [1, 2, 3, 4, 5]
+i = 0
+
+while i < len(li):
+	print(li[i])
+	i += 1
+```
+## for loops
+```python
+fruits = ['apple', 'orange', 'banana']
+for x in fruits:
+	print(x)
+```
+### for loop on string
+```python
+for x in 'apple':
+	print(x)
+```
+### break
+```python
+for i in 'test':
+	print(i)
+	if i == 'e':
+		break
+# output: t e
+```
+### continue
+```python
+for i in 'test':
+	if i == s:
+		continue
+	print(i)
+# output: t e t
+```
+### else
+```python
+for i in 'test':
+	print(i)
+else:
+	print('Loop ended!')
+```
+### range()
+```python
+for x in range(0, 6, 2): # arguments: start, stop, step
+	print(x)
+# output: 0, 2, 4
+```
+### nested loops
+```python
+li = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] 
+for i in range(len(li)): 
+    for j in range(len(li[i])): 
+        print(li[i][j])
+```
+### pass
+```python
+for x in [1, 2, 3]:
+	pass
+```
+### List comprehension
+```python
+li = [for x in range(10)]
+print(li)
+```
+**Another example:**
+```python
+fruits = ['apple', 'banana', 'orange', 'kiwi', 'lemon'] 
+li = [x for x in fruits if 'a' in x] 
+print(li)
+```
+**Another example:**
+```python
+fruits = ['apple', 'banana', 'orange', 'kiwi', 'lemon'] 
+li = [x for x in fruits if 'a' in x] 
+print(li)
+```
+**Another example:**
+```python
+fruits = ['apple', 'banana', 'lemon'] 
+li = [x if x != 'banana' else 'orange' for x in fruits] 
+print(li)
 ```
 # String Formatting
 ## f-string
@@ -223,6 +410,379 @@ numOne = 3
 numTwo = 4
 numThree = 5
 print('number one: {first}\nnumber two: {second}\nnumber three: {third}'.format(first = numOne, second = numTwo, third = numThree))
+```
+# Functions
+```python
+def my_func():
+	print('hello world!')
+	
+my_func()
+my_func()
+```
+## Arguments
+```python
+def multiply(num1:int, num2:int):
+	print(num1 * num2)
+
+
+multiply(7, 9)
+multiply(3, 2)
+multiply('a', 'b')
+```
+## Desired Arguments
+```python
+def classmates_names(*names):
+	length = len(names)
+	if length>0:
+		for i in range(length):
+			print(names[i])
+	else:
+		print('Undefined!')
+
+classmates_names('Ali', 'Sadra', 'Mohsen')
+```
+## Keyword Arguments
+```python
+def my_func(name1, name2):
+    print(f'Names: {name1} - {name2}')
+my_func(name2 = 'Reza', name1 = 'Asqar')
+```
+### Desired Keyword Arguments
+```python
+def classmates_names(**names):
+    print(names['name1'])
+    print(names['name2'])
+    print(names['name3'])
+
+classmates_names(name1 = 'Ali', name2 = 'Sadra', name3 = 'Mohsen')
+```
+## Default Arguments
+```python
+def my_func(num1=1, num2=1):
+    print(f'num1 + num2 = {num1+num2}')
+
+my_func()
+```
+## return
+```python
+def my_func(num1, num2):
+    return num1 + num2
+
+print(my_func(3, 5))
+x = my_func(10, 12)
+print(x)
+```
+## pass
+```python
+def my_func():
+    pass
+
+my_func()
+```
+## lambda
+```python
+my_func = lambda a, b : a + b
+print(my_func(3, 4))
+```
+**Another example:**
+```python
+def my_func(n):
+    return lambda a : a + n
+
+my_adder = my_func(2)
+print(my_adder(10))
+```
+## Recursive functions
+```python
+def is_prime(n, div = None):
+    if div is None:
+        div = n - 1
+    while div >= 2:
+        if n % div == 0:
+            print(f"{n} is not prime!")
+            break
+        else:
+            return is_prime(n, div-1)
+    else:
+        print(f"{n} is prime!")
+
+is_prime(4)
+is_prime(3)
+```
+# Classes
+```python
+class MyClass:
+	a = 10
+
+objOne = MyClass()
+print(objOne.a)
+```
+## Constructor
+```python
+class Person:
+	def __init__(self, name: str, age: int): # constructor
+		self.name = name
+		self.age = age
+	def call(self):
+		print(f"My name is {self.name} and I'm {self.age}")
+
+objOne = Person('Ali', 23)
+objOne.call()
+```
+## Changing object attrs
+```python
+class Person:
+	def __init__(self):
+		self.name = 'Ali'
+		self.age = 23
+	def call(self):
+		print(f"My name is {self.name} and I'm {self.age}")
+
+objOne = Person()
+objOne.name = 'Mohsen'
+objOne.call()
+del objOne.age
+```
+## pass
+```python
+class Test():
+	pass
+```
+# Object-Oriented Programming(OOP)
+## Encapsulation
+```python
+class MyClass:
+	def __init__(self):
+		self.__a = 2 # private variable
+	def __test(self): # private function
+		return self.__a *2
+	def output(self): # public function
+		print(self.__test())
+		
+objOne = MyClass()
+objOne.output()
+```
+## Inheritance
+```python
+class Person:
+	def __init__(self, name: str, age: int):
+		self.name = name
+		self.age = age
+	def print(self):
+		print(f'My name is {self.name} and I am {self.age}')
+	
+class MyClass(Person):
+	pass
+
+objOne = MyClass('Ali', 23)
+objOne.print()
+```
+### Execute parent's init method
+If you have `__init__()` inside child's class, the `__init__()` in parent class won't be executed. But there is a way to execute it:
+```python
+class Person:
+	def __init__(self, name: str, age: int):
+		self.name = name
+		self.age = age
+	def print(self):
+		print(f'My name is {self.name} and I am {self.age}')
+	
+class MyClass(Person):
+	def __init__(self, name, age):
+		Person.__init__(self, name, age)
+
+objOne = MyClass('Ali', 23)
+objOne.print()
+```
+You can also use `super()` to inherite all methods of the parent. same result:
+```python
+class Person:
+	def __init__(self, name: str, age: int):
+		self.name = name
+		self.age = age
+	def print(self):
+		print(f'My name is {self.name} and I am {self.age}')
+	
+class MyClass(Person):
+	def __init__(self, name, age):
+		super().__init__(name, age)
+
+objOne = MyClass('Ali', 23)
+objOne.print()
+```
+### Child's function
+```python
+class Person:
+	def __init__(self, name: str, age: int):
+		self.name = name
+		self.age = age
+	def print(self):
+		print(f'My name is {self.name} and I am {self.age}')
+	
+class MyClass(Person):
+	def __init__(self, name, age, height: int):
+		super().__init__(name, age)
+		self.height = height
+	def new_print(self):
+		print('My height is {self.height}')
+
+objOne = MyClass('Ali', 23, 180)
+objOne.print()
+objOne.new_print()
+```
+## Composition
+Composition is like inheriance but has some major differences. We use it when we don't want to change the parent class(since class encapsulate things...). 
+```python
+class Component:
+	def __init__(self):
+		print('Component class object is created...')
+	def component_test(self):
+		print('Component class component_test method executed...')
+
+class Coposite:
+	def __init__(self):
+		self.objOne = Component()
+	def composite_test(self):
+		print('Composite class composite_test method executed...')
+		self.objOne.component_test()
+		
+objTwo = Composite()
+objTwo.composite_test()
+```
+## Abstraction
+```python
+from abc import ABC, abstractmethod
+
+class MyClass(ABC): # abstract class
+	def return_val(self, x):
+		print(f'Value is {x}')
+	@abstractmethod
+	def test(self): # abstract function
+		pass
+	
+class TestClass(MyClass):
+	def test(self):
+		print('Tets string from TestClass!')
+
+class AnotherTestClass(MyClass):
+	def test(self):
+		print('Another test string from AnotherTestClass!')
+	
+objOne = TestClass()
+objOne.test()
+objOne.return_val(20)
+objTwo = AnotherTestClass()
+objTwo.test()
+```
+## Polymorphism
+`len()` is a good polymorphism example. Another example is the function that has default values:
+```python
+def multiply(a:int=0, b:int=0):
+	return a*b
+print(multiply(3))
+print(multiply())
+print(multiply(2, 3))
+```
+Another example:
+```python
+class India(): 
+    def capital(self): 
+        print("New Delhi is the capital of India.") 
+  
+    def language(self): 
+        print("Hindi is the most widely spoken language of India.") 
+  
+    def type(self): 
+        print("India is a developing country.") 
+  
+class USA(): 
+    def capital(self): 
+        print("Washington, D.C. is the capital of USA.") 
+  
+    def language(self): 
+        print("English is the primary language of USA.") 
+  
+    def type(self): 
+        print("USA is a developed country.") 
+  
+obj_ind = India() 
+obj_usa = USA() 
+for country in (obj_ind, obj_usa): 
+    country.capital() 
+    country.language() 
+    country.type() 
+```
+# Scope
+## Local Scope
+```python
+def my_func():
+	a = 10
+	print(a)
+
+my_func()
+```
+### Function inside Function
+```python
+def my_func():
+	a = 10
+	def my_inner_func():
+		print(a)
+	my_inner_func()
+
+my_func()
+```
+## Global Scope
+```python
+a = 10
+def my_func():
+	print(a)
+
+myfunc()
+```
+### Naming variables
+```python
+a = 10
+
+def my_func():
+	a = 20
+	print(a)
+
+my_func()
+```
+### global keyword
+```python
+def my_func():
+	global a
+	a = 10
+	
+my_func()
+print(a)
+```
+To use the global value inside a function, first the function needs to be called! You can also change the global variable inside a function:
+```python
+a = 10
+
+def my_func():
+	global a
+	a = 20
+
+my_func()
+print(a)
+```
+## nonlocal variable
+```python
+a = 0
+def outer_func():
+	a = 10
+	def inner_func():
+		nonlocal a
+		a = 20
+		print(a)
+	inner_func()
+	print(a)
+
+outer_func()
+print(a)
 ```
 # Modules
 Create mymodule.py file:
