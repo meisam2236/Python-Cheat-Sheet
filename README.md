@@ -85,6 +85,7 @@
 	- [or](#or)
 	- [nested if](#nested-if)
 	- [pass](#pass)
+- [match-case](#match-case)
 - [Loops](#loops)
 	- [while loops](#while-loops)
 		- [break](#break)
@@ -898,6 +899,30 @@ else:
 ```python
 if 20 > 10:
 	pass
+```
+# match-case
+In python v3.10, you can do match-case instead of if, else thing:
+```python
+def converted_day_of_week(dayOfWeek: str):
+	match dayOfWeek.lower():
+		case 'saturday':
+			return 'شنبه'
+		case 'sunday':
+			return 'یکشنبه'
+		case 'monday':
+			return 'دوشنبه'
+		case 'tuesday':
+			return 'سه شنبه'
+		case 'wednesday':
+			return 'چهار شنبه'
+		case 'thursday':
+			return 'پنج شنبه'
+		case 'friday':
+			return 'جمعه'
+		case _:
+			return 'not found!'
+
+print(converted_day_of_week('Sunday'))
 ```
 # Loops
 ## while loops
